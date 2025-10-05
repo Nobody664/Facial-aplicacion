@@ -1,0 +1,37 @@
+# Archivos de entorno y configuración privada
+.env
+.env.local
+.env.*.local
+
+# Ignorar los archivos de entorno virtual
+venv/
+.env/
+
+# Archivos de configuración de IDEs comunes
+.vscode/
+.idea/
+
+# Archivos de compilación y logs
+*.log
+*.pot
+*.pyc
+__pycache__/
+
+# Archivos generados por compiladores
+*.db
+
+# Otros
+*.pyo
+*.coverage
+*.hypothesis/
+.tox/
+nosetests.xml
+coverage.xml
+*.mo
+*.swp
+
+# Ignorar archivos de Docker si usas Docker
+#.docker/
+
+# Ignorar archivos temporales de editor
+*~

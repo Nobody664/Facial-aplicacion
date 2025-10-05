@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+mediapipe
+opencv-python
+python-dotenv
+numpy
+pydantic[email]
+pydantic
+passlib
+python-multipart
+jose
