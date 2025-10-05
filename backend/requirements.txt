@@ -10,4 +10,7 @@ pydantic[email]
 pydantic
 passlib
 python-multipart
-jose
+python-jose
+bcrypt
+cv2
+requests

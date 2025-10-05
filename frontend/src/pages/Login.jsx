@@ -1,49 +1,49 @@
 import { useState } from "react";
-import axios from "axios";
-import "../App.css";
-
-const API_URL = "http://127.0.0.1:8000"; // Cambia si tu backend está en otro host
+import api from "../api/api";
+import"../styles/global.css";
+import InputField from "../components/InputField";
 
 export default function Login({ onLogin }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleChange = (field) => (e) => {
+    setForm({ ...form, [field]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, {
-        username,
-        password,
-      });
-      localStorage.setItem("token", response.data.access_token);
+      const res = await api.post("/auth/login", form);
+      localStorage.setItem("token", res.data.access_token);
       onLogin();
     } catch (err) {
-      setError("Credenciales incorrectas o error de conexión.");
+      setError("Credenciales inválidas o error del servidor.");
     }
   };
 
   return (
     <div className="container">
-      <h2 style={{ textAlign: "center", marginBottom: 20 }}>Iniciar Sesión</h2>
-      {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Usuario"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
+      <h1>Iniciar Sesión</h1>
+      <form onSubmit={handleSubmit}>
+        <InputField
+          label="Correo electrónico"
+          type="email"
+          value={form.email}
+          onChange={handleChange("email")}
         />
-        <input
+        <InputField
+          label="Contraseña"
           type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
+          value={form.password}
+          onChange={handleChange("password")}
         />
-        <button type="submit">Entrar</button>
+        <button type="submit" style={{ width: "100%", marginTop: "1rem" }}>
+          Entrar
+        </button>
       </form>
+
+      {error && <p style={{ color: "red", marginTop: "1rem" }}>{error}</p>}
     </div>
   );
 }

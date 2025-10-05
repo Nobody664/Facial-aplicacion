@@ -2,7 +2,7 @@ import cv2
 import requests
 
 API_URL = "http://127.0.0.1:8000/faces/register"
-TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZXNhckBkZW1vLmNvbSIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTc1OTYyOTc5MH0.ZpfJNOGupdEd6sITrudcVd5X8YEO3fobrp4yHCwD770"  # reemplaza con el obtenido del login
+TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZXNhckBkZW1vLmNvbSIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTc1OTY5Njc4N30.eYVFZIxvSuOEf7dyleXTHQqAzBV6NqJvcjiRbar22iU"  # reemplaza con el obtenido del login
 
 # Abrir cámara
 cap = cv2.VideoCapture(0)

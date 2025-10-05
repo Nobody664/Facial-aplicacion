@@ -1,49 +1,23 @@
-import "../App.css";
 import { useState } from "react";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+import RegisterFace from "./RegisterFace";
+import "../styles/dashboard.css";
 
 export default function Dashboard() {
-  const [section, setSection] = useState("inicio");
-
-  const renderContent = () => {
-    switch (section) {
-      case "usuarios":
-        return <p> Gestión de usuarios</p>;
-      case "rostros":
-        return <p> Gestión de rostros</p>;
-      default:
-        return <p> Bienvenido al panel de administración</p>;
-    }
-  };
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    window.location.reload();
-  };
+  const [activePage, setActivePage] = useState("register-face");
 
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
-      <aside
-        style={{
-          width: "220px",
-          backgroundColor: "#2c3e50",
-          color: "white",
-          padding: "20px",
-        }}
-      >
-        <h3>Panel</h3>
-        <nav style={{ marginTop: 20 }}>
-          <button onClick={() => setSection("inicio")}>Inicio</button>
-          <button onClick={() => setSection("usuarios")}>Usuarios</button>
-          <button onClick={() => setSection("rostros")}>Rostros</button>
-          <button
-            onClick={logout}
-            style={{ backgroundColor: "#e74c3c", marginTop: 20 }}
-          >
-            Cerrar sesión
-          </button>
-        </nav>
-      </aside>
-      <main style={{ flex: 1, padding: "40px" }}>{renderContent()}</main>
+    <div className="dashboard">
+      <Header />
+      <div className="dashboard-body">
+        <Sidebar activePage={activePage} setActivePage={setActivePage} />
+        <main className="dashboard-content">
+          {activePage === "register-face" && <RegisterFace />}
+          {activePage === "users" && <h2>Gestión de Usuarios</h2>}
+          {activePage === "roles" && <h2>Gestión de Roles</h2>}
+        </main>
+      </div>
     </div>
   );
 }
