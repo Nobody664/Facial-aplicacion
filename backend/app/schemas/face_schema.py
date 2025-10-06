@@ -1,19 +1,15 @@
 from pydantic import BaseModel
-from typing import Optional, List
-from datetime import datetime
+from typing import List, Optional
 
 class FaceBase(BaseModel):
-    name: Optional[str] = None
+    user_id: int
     embedding: List[float]
 
 class FaceCreate(FaceBase):
-    nombre: str
-    user_id: Optional[int] = None
-    image_path: Optional[str] = None
+    pass
 
 class FaceResponse(FaceBase):
     id: int
-    created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True

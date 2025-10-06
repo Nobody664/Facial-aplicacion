@@ -1,5 +1,5 @@
 import numpy as np
-from app.models.face_model import Face
+from app.models.face_model import FaceData
 from app.services.face_recognition import get_face_embedding
 
 async def update_embeddings(db, file):
@@ -12,7 +12,7 @@ async def update_embeddings(db, file):
     # o para añadir nuevas muestras de un usuario existente
 
     # Guardar o actualizar un embedding de ejemplo
-    new_face = Face(name="Unknown", embedding=np.array(embedding).tolist())
+    new_face = FaceData(name="Unknown", embedding=np.array(embedding).tolist())
     db.add(new_face)
     db.commit()
 

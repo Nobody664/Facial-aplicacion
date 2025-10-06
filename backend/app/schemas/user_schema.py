@@ -8,7 +8,11 @@ class UserBase(BaseModel):
     role: Optional[str] = "user"
 
 class UserCreate(UserBase):
+    full_name: str
+    email: str
     password: str
+    role: str
+    face_data: Optional[str] = None
 
 class UserResponse(UserBase):
     id: int
@@ -16,7 +20,7 @@ class UserResponse(UserBase):
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class UserLogin(BaseModel):
     email: EmailStr

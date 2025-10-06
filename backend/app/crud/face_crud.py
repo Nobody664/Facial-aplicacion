@@ -1,25 +1,27 @@
 from sqlalchemy.orm import Session
-from app.models.face_model import Face
 from app.schemas.face_schema import FaceCreate
+from app.models.face_model import FaceData
 
-def crear_rostro(db: Session, face: FaceCreate):
-    db_face = Face(nombre=face.nombre, embedding=face.embedding)
-    db.add(db_face)
+def create_face_entry(db: Session, user_id: int, embedding: list):
+    new_face = FaceData(
+        user_id=user_id,
+        embedding=embedding
+    )
+    db.add(new_face)
     db.commit()
-    db.refresh(db_face)
-    return db_face
-
+    db.refresh(new_face)
+    return new_face
 
 def obtener_rostros(db: Session):
-    return db.query(Face).all()
+    return db.query(FaceData ).all()
 
 
 def obtener_rostro_por_id(db: Session, face_id: int):
-    return db.query(Face).filter(Face.id == face_id).first()
+    return db.query(FaceData).filter(FaceData.id == face_id).first()
 
 
 def eliminar_rostro(db: Session, face_id: int):
-    rostro = db.query(Face).filter(Face.id == face_id).first()
+    rostro = db.query(FaceData).filter(FaceData.id == face_id).first()
     if rostro:
         db.delete(rostro)
         db.commit()

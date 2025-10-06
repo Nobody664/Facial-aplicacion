@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, JSON, ForeignKey, DateTime, func
 from sqlalchemy.orm import relationship
 from app.database import Base
 
-class Face(Base):
+class FaceData(Base):
     __tablename__ = "faces"
 
     id = Column(Integer, primary_key=True, index=True)
