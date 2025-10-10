@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
-from app.schemas.face_schema import FaceCreate
-from app.models.face_model import FaceData
+from app.schemas.person_schema import PersonCreate
+from backend.app.models.person_model import Person
 
 def create_face_entry(db: Session, user_id: int, embedding: list):
-    new_face = FaceData(
+    new_face = Person(
         user_id=user_id,
         embedding=embedding
     )
@@ -13,15 +13,15 @@ def create_face_entry(db: Session, user_id: int, embedding: list):
     return new_face
 
 def obtener_rostros(db: Session):
-    return db.query(FaceData ).all()
+    return db.query(Person).all()
 
 
 def obtener_rostro_por_id(db: Session, face_id: int):
-    return db.query(FaceData).filter(FaceData.id == face_id).first()
+    return db.query(Person).filter(Person.id == face_id).first()
 
 
 def eliminar_rostro(db: Session, face_id: int):
-    rostro = db.query(FaceData).filter(FaceData.id == face_id).first()
+    rostro = db.query(Person).filter(Person.id == face_id).first()
     if rostro:
         db.delete(rostro)
         db.commit()

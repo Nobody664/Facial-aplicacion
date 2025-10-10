@@ -1,8 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.exc import OperationalError
-from app.database import Base, engine
-from app.routes import users, recognition, auth, training
+from app.db.base import Base
+from app.db.session import engine
+from app.routes import users, person_routes, auth, training
 import logging
 import time
 
@@ -37,7 +38,7 @@ app.add_middleware(
 # Rutas principales
 # --------------------------------------------------
 app.include_router(auth.router, prefix="/auth", tags=["Autenticación"])
-app.include_router(recognition.router, prefix="/faces", tags=["Rostros"])
+app.include_router(person_routes.router, prefix="/faces", tags=["Rostros"])
 app.include_router(users.router, prefix="/users", tags=["Usuarios"])
 app.include_router(training.router, prefix="/training", tags=["Entrenamiento"])
 

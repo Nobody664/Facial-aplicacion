@@ -1,13 +1,9 @@
-from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from app.database import get_db
 from app.schemas.user_schema import UserCreate, UserResponse, UserLogin, Token
 from app.crud import user_crud
 from app.services.auth_service import create_access_token, verify_password
-from app.services.face_recognition import process_face_from_bytes
-from app.crud.face_crud import create_face_entry
-from app.crud import face_crud
-from app.schemas.face_schema import FaceCreate
+from app.db.session import get_db
 
 router = APIRouter()
 
@@ -23,23 +19,6 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
 
     new_user = user_crud.create_user(db=db, user=user)
     return new_user
-
-@router.post("/register-face")
-async def register_face(
-    user_id: int = Form(...),
-    file: UploadFile = File(...),
-    db: Session = Depends(get_db)
-):
-    image_bytes = await file.read()
-    masked_face, embedding = process_face_from_bytes(image_bytes)
-
-    if embedding is None:
-        raise HTTPException(status_code=400, detail="No se detectó un rostro válido.")
-
-    face_create = FaceCreate(user_id=user_id, embedding=embedding.tolist())
-    new_face = face_crud.create_face_entry(db, face_create)
-
-    return {"message": "Rostro registrado correctamente", "face_id": new_face.id}
 
 
 @router.post("/login", response_model=Token)
