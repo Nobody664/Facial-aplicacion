@@ -11,6 +11,7 @@ class PersonBase(BaseModel):
     grupo: str
     grado: Optional[str] = None
     seccion: Optional[str] = None
+    face_data: Optional[str] = None
 
 class PersonCreate(PersonBase):
     pass

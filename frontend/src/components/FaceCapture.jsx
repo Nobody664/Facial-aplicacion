@@ -77,7 +77,7 @@ export default function FaceCapture({ onCapture }) {
 
   const handleCapture = () => {
     if (!faceDetected) {
-      alert("❌ No se detectó un rostro válido. Intenta acercarte o mejora la iluminación.");
+      alert(" No se detectó un rostro válido. Intenta acercarte o mejora la iluminación.");
       return;
     }
     const canvas = canvasRef.current;
@@ -114,7 +114,7 @@ export default function FaceCapture({ onCapture }) {
         Capturar Rostro
       </button>
       <p className="mt-2 text-sm text-gray-600">
-        {faceDetected ? "✅ Rostro detectado correctamente" : "🔴 Esperando detección de rostro..."}
+        {faceDetected ? " Rostro detectado correctamente" : " Esperando detección de rostro..."}
       </p>
     </div>
   );

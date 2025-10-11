@@ -5,7 +5,7 @@ from app.services.person_service import register_person_with_face
 from app.db.session import get_db
 from app.services.dependencies import get_current_user
 
-router = APIRouter(prefix="/persons", tags=["Registro Facial"])
+router = APIRouter()
 
 @router.post("/register", response_model=PersonResponse)
 def register_person(

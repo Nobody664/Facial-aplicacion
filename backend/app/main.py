@@ -38,7 +38,7 @@ app.add_middleware(
 # Rutas principales
 # --------------------------------------------------
 app.include_router(auth.router, prefix="/auth", tags=["Autenticación"])
-app.include_router(person_routes.router, prefix="/faces", tags=["Rostros"])
+app.include_router(person_routes.router, prefix="/persons", tags=["Registro Facial"])
 app.include_router(users.router, prefix="/users", tags=["Usuarios"])
 app.include_router(training.router, prefix="/training", tags=["Entrenamiento"])
 

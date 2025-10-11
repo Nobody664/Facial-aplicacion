@@ -8,9 +8,9 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String(120), unique=True, nullable=False)
     password_hash = Column(String(255), nullable=False)
+
     role_id = Column(Integer, ForeignKey("roles.id"), nullable=False)
-
-    role = relationship("Role")
-
+    role = relationship("Role", back_populates="users")
+""" 
     def __repr__(self):
-        return f"<User(email={self.email}, role={self.role.name})>"
+        return f"<User(email={self.email}, role={self.role.name})>" """

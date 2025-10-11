@@ -12,10 +12,12 @@ class UserCreate(UserBase):
     email: str
     password: str
     role: str
-    face_data: Optional[str] = None
+   
 
 class UserResponse(UserBase):
     id: int
+    email: str
+    role: str
     is_active: bool
     created_at: datetime
 
